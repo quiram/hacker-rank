@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.countingsort1;
+package com.github.quiram.hackerrank.basic.countingsort1;
 
 
 import java.util.Arrays;

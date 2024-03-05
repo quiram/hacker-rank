@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.timeconversion;
+package com.github.quiram.hackerrank.basic.timeconversion;
 
 import java.io.*;
 

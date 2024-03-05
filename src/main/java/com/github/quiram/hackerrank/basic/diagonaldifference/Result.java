@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.diagonaldifference;
+package com.github.quiram.hackerrank.basic.diagonaldifference;
 
 import java.util.List;
 import java.util.stream.IntStream;

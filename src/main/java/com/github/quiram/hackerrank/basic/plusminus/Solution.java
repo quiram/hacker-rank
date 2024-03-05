@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.plusminus;
+package com.github.quiram.hackerrank.basic.plusminus;
 
 import java.io.BufferedReader;
 import java.io.IOException;

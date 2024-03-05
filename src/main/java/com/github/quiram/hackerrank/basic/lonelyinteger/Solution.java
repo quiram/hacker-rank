@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.lonelyinteger;
+package com.github.quiram.hackerrank.basic.lonelyinteger;
 
 import java.io.*;
 import java.util.ArrayList;

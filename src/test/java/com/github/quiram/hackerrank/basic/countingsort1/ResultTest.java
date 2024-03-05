@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.countingsort1;
+package com.github.quiram.hackerrank.basic.countingsort1;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

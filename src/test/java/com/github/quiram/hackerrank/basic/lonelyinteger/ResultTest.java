@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.diagonaldifference;
+package com.github.quiram.hackerrank.basic.lonelyinteger;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,17 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ResultTest {
     @ParameterizedTest
     @MethodSource("scenarios")
-    void testScenarios(List<List<Integer>> arr, int result) {
-        assertEquals(result, Result.diagonalDifference(arr));
+    void testScenarios(List<Integer> arr, int result) {
+        assertEquals(result, Result.lonelyinteger(arr));
     }
 
     public static Stream<Arguments> scenarios() {
         return Stream.of(
-                Arguments.of(List.of(
-                        List.of(1, 2, 3),
-                        List.of(4, 5, 6),
-                        List.of(9, 8, 9)
-                ), 2)
+                Arguments.of(List.of(1, 2, 3, 4, 3, 2, 1), 4)
         );
     }
 

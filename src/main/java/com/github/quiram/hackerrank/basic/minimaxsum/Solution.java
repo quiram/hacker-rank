@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.minimaxsum;
+package com.github.quiram.hackerrank.basic.minimaxsum;
 
 import java.io.BufferedReader;
 import java.io.IOException;

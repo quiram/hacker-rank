@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.timeconversion;
+package com.github.quiram.hackerrank.basic.timeconversion;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
