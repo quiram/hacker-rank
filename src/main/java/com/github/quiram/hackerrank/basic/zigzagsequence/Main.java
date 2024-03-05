@@ -3,6 +3,9 @@ package com.github.quiram.hackerrank.basic.zigzagsequence;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * <a href="https://www.hackerrank.com/challenges/one-week-preparation-kit-zig-zag-sequence/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=one-week-preparation-kit&playlist_slugs%5B%5D=one-week-day-three">Zig Zag Sequence</a>
+ */
 public class Main {
 
     public static void main(String[] args) {
