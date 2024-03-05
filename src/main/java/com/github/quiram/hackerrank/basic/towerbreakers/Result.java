@@ -18,8 +18,8 @@ class Result {
         if (m == 1) {
             return 2;
         }
-        final int i = n % 2;
-        return i == 0 ? 2 : i;
+
+        return (n + 1) % 2 + 1;
     }
 
 }
