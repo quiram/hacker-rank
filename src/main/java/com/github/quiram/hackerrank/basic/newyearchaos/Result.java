@@ -1,7 +1,6 @@
 package com.github.quiram.hackerrank.basic.newyearchaos;
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,32 +15,30 @@ class Result {
      */
 
     public static void minimumBribes(List<Integer> queue) {
-        List<Integer> q = new LinkedList<>(queue);
-        boolean bribesFound;
-        boolean tooChaotic = false;
-        int[] bribeCount = new int[queue.size()];
-        do {
-            bribesFound = false;
-            for (int i = 1; i < q.size() && !tooChaotic; i++) {
-                if (q.get(i) < q.get(i - 1)) {
-                    int temp = q.get(i);
-                    q.set(i, q.get(i - 1));
-                    q.set(i - 1, temp);
-                    bribesFound = true;
-                    bribeCount[q.get(i) - 1]++;
-                    if (bribeCount[q.get(i) - 1] > 2) {
-                        tooChaotic = true;
-                    }
-                }
+        List<Integer> q = new ArrayList<>(queue);
+
+        int bribes = 0;
+        boolean chaos = false;
+        for (int i = q.size() - 1; i >= 0; i--) {
+            int expectedTicket = i + 1;
+            if (i - 1 >= 0 && q.get(i - 1) == expectedTicket) {
+                bribes++;
+                int tmp = q.get(i);
+                q.set(i, q.get(i - 1));
+                q.set(i - 1, tmp);
+            } else if (i - 2 >= 0 && q.get(i - 2) == expectedTicket) {
+                bribes += 2;
+
+                int tmp = q.get(i - 2);
+                q.set(i - 2, q.get(i - 1));
+                q.set(i - 1, q.get(i));
+                q.set(i, tmp);
+            } else if (q.get(i) != expectedTicket) {
+                chaos = true;
+                break;
             }
         }
-        while (bribesFound && !tooChaotic);
 
-        if (tooChaotic) {
-            System.out.println("Too chaotic");
-        } else {
-            final int bribes = Arrays.stream(bribeCount).reduce(0, Integer::sum);
-            System.out.println(bribes);
-        }
+        System.out.println(chaos ? "Too chaotic" : bribes);
     }
 }
