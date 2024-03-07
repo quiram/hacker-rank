@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.tests.flippingthematrix;
+package com.github.quiram.hackerrank.tests.basic.flippingthematrix;
 
 import java.util.List;
 import java.util.stream.IntStream;

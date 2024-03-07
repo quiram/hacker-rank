@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.tests.palindromeindex;
+package com.github.quiram.hackerrank.tests.basic.palindromeindex;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

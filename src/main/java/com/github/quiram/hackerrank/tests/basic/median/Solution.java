@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.tests.median;
+package com.github.quiram.hackerrank.tests.basic.median;
 
 import java.io.*;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.github.quiram.hackerrank.tests.palindromeindex;
+package com.github.quiram.hackerrank.tests.basic.palindromeindex;
 
 class Result {
 
