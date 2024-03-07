@@ -17,28 +17,4 @@ class ResultTest {
     void palindromeIndex(String s, int index) {
         assertEquals(index, Result.palindromeIndex(s));
     }
-
-    @ParameterizedTest
-    @CsvSource({
-            "aaab,false",
-            "baa,false",
-            "aa,true",
-            "aba,true"
-    })
-    void isPalindrome(String s, boolean isPalindrome) {
-        assertEquals(isPalindrome, Result.isPalindrome(s));
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            "aaab,1,aab",
-            "baa,1,ba",
-            "aa,1,a",
-            "aba,1,aa",
-            "abc,0,bc",
-            "abc,2,ab"
-    })
-    void removeCharAT(String input, int i, String result) {
-        assertEquals(result, Result.removeCharAt(input, i));
-    }
 }

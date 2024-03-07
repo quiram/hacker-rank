@@ -10,31 +10,52 @@ class Result {
      */
 
     public static int palindromeIndex(String s) {
-        if (isPalindrome(s)) {
-            return -1;
+        int i = 0;
+        int j = s.length() - 1;
+        boolean same = true;
+
+        // already palindrome?
+        while (i < j && same) {
+            same = s.charAt(i) == s.charAt(j);
+            i++;
+            j--;
         }
 
-        for (int i = 0; i < s.length(); i++) {
-            if (isPalindrome(removeCharAt(s, i))) {
-                return i;
-            }
+        if (same) {
+            return -1;
+        }
+        int candidateLeftIndex = i - 1;
+        int candidateRightIndex = j + 1;
+
+        // Skip one at the beginning
+        i = candidateLeftIndex + 1;
+        j = candidateRightIndex;
+        same = true;
+        while (i < j && same) {
+            same = s.charAt(i) == s.charAt(j);
+            i++;
+            j--;
+        }
+
+        if (same) {
+            return candidateLeftIndex;
+        }
+
+        // Skip one at the end
+        i = candidateLeftIndex;
+        j = candidateRightIndex - 1;
+        same = true;
+        while (i < j && same) {
+            same = s.charAt(i) == s.charAt(j);
+            i++;
+            j--;
+        }
+
+        if (same) {
+            return candidateRightIndex;
         }
 
         return -1;
-    }
-
-    public static boolean isPalindrome(String s) {
-        int i = 0;
-        boolean same = true;
-        for (; i < s.length() / 2 && same; i++) {
-            same = s.charAt(i) == s.charAt(s.length() - 1 - i);
-        }
-
-        return same;
-    }
-
-    public static String removeCharAt(String s, int i) {
-        return s.substring(0, i) + s.substring(i + 1);
     }
 
 }
