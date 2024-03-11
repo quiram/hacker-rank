@@ -34,7 +34,7 @@ class Result {
                 int p1 = 0;
                 int p2 = 0;
                 boolean compatible = true;
-                for (int i = 0; i < c1.length() && i < c2.length() && compatible; i++) {
+                for (int i = 0; i < c1.length() && i < c2.length() && compatible && c1.length() > 1; i++) {
                     p1 += Integer.parseInt("" + c1.charAt(i));
                     p2 += Integer.parseInt("" + c2.charAt(i));
                     compatible = p1 != p2;
@@ -51,16 +51,15 @@ class Result {
     private static void generate(int partial, StringBuilder sb, int m) {
         if (partial == m) {
             combinations.add(sb.toString());
-            sb.delete(sb.length() - 1, sb.length());
         }
 
         if (partial > m) {
-            sb.delete(sb.length() - 1, sb.length());
             return;
         }
 
         for (int i = 1; i <= 4; i++) {
             generate(partial + i, sb.append(i), m);
+            sb.delete(sb.length() - 1, sb.length());
         }
     }
 
