@@ -3,6 +3,9 @@ package com.github.quiram.hackerrank.intermediate.simpletexteditor;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * <a href="https://www.hackerrank.com/challenges/one-week-preparation-kit-simple-text-editor/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=one-week-preparation-kit&playlist_slugs%5B%5D=one-week-day-six">Simple Text Editor</a>
+ */
 public class Solution {
     private static final StringBuilder sb = new StringBuilder();
     private static final Stack<Object> undoStack = new Stack<>();
