@@ -19,10 +19,6 @@ class Result {
     public static int legoBlocks(int n, int m) {
         // Write your code here
         final int allPermutations = g(n, m);
-        if (n == 1) {
-            return allPermutations;
-        }
-
         final int invalidOnes = IntStream.range(1, m).map(i -> legoBlocks(n, i) * g(n, m - i)).reduce(0, Integer::sum);
         return (allPermutations - invalidOnes) % (1000000007);
     }
