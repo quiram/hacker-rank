@@ -1,8 +1,10 @@
 package com.github.quiram.hackerrank.intermediate.legoblocks;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.stream.IntStream;
 
+/**
+ * <a href="https://www.hackerrank.com/challenges/one-week-preparation-kit-lego-blocks/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=one-week-preparation-kit&playlist_slugs%5B%5D=one-week-day-six">Lego Blocks</a>
+ */
 class Result {
 
     /*
@@ -14,53 +16,35 @@ class Result {
      *  2. INTEGER m
      */
 
-    private static Set<String> combinations;
-
     public static int legoBlocks(int n, int m) {
-        combinations = new HashSet<>();
-
         // Write your code here
-        //  n = 2;
-        generate(0, new StringBuilder(), m);
-
+        final int allPermutations = g(n, m);
         if (n == 1) {
-            return combinations.size();
+            return allPermutations;
         }
 
-        int count = 0;
-
-        for (String c1 : combinations) {
-            for (String c2 : combinations) {
-                int p1 = 0;
-                int p2 = 0;
-                boolean compatible = true;
-                for (int i = 0; i < c1.length() && i < c2.length() && compatible && c1.length() > 1; i++) {
-                    p1 += Integer.parseInt("" + c1.charAt(i));
-                    p2 += Integer.parseInt("" + c2.charAt(i));
-                    compatible = p1 != p2;
-                }
-                if (compatible) {
-                    count++;
-                }
-            }
-        }
-
-        return count;
+        final int invalidOnes = IntStream.range(1, m).map(i -> legoBlocks(n, i) * g(n, m - i)).reduce(0, Integer::sum);
+        return (allPermutations - invalidOnes) % (1000000007);
     }
 
-    private static void generate(int partial, StringBuilder sb, int m) {
-        if (partial == m) {
-            combinations.add(sb.toString());
+    private static int f(int n) {
+        if (n < 0) {
+            return 0;
         }
 
-        if (partial > m) {
-            return;
+        if (n == 0) {
+            return 1;
         }
 
-        for (int i = 1; i <= 4; i++) {
-            generate(partial + i, sb.append(i), m);
-            sb.delete(sb.length() - 1, sb.length());
-        }
+        return IntStream.range(0, n)
+                .map(Result::f)
+                .reduce(0, Integer::sum);
+    }
+
+    private static int g(int n, int m) {
+        return (int) Math.pow(f(m), n);
     }
 
 }
+
+
