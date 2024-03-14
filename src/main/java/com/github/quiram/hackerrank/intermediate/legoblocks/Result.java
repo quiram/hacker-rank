@@ -1,12 +1,8 @@
 package com.github.quiram.hackerrank.intermediate.legoblocks;
 
-import java.math.BigInteger;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
-
-import static java.math.BigInteger.ONE;
-import static java.math.BigInteger.ZERO;
 
 /**
  * <a href="https://www.hackerrank.com/challenges/one-week-preparation-kit-lego-blocks/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=one-week-preparation-kit&playlist_slugs%5B%5D=one-week-day-six">Lego Blocks</a>
@@ -14,7 +10,8 @@ import static java.math.BigInteger.ZERO;
 class Result {
 
     private final static Map<String, Integer> intCache = new ConcurrentHashMap<>();
-    private final static Map<String, BigInteger> bigIntegerCache = new ConcurrentHashMap<>();
+    private final static Map<String, Long> longCache = new ConcurrentHashMap<>();
+    private static final int base = 1000000007;
 
     /*
      * Complete the 'legoBlocks' function below.
@@ -33,49 +30,49 @@ class Result {
             return maybeResult;
         }
 
-        final BigInteger allPermutations = g(n, m);
-        final BigInteger invalidOnes = IntStream.range(1, m)
+        final long allPermutations = g(n, m);
+        final long invalidOnes = IntStream.range(1, m)
                 .parallel()
-                .mapToObj(i -> g(n, m - i).multiply(BigInteger.valueOf(legoBlocks(n, i))))
-                .reduce(ZERO, BigInteger::add);
-        final int result = allPermutations.subtract(invalidOnes)
-                .remainder(BigInteger.valueOf(1000000007))
-                .intValueExact();
+                .mapToLong(i -> ((g(n, m - i) * (legoBlocks(n, i))) % base))
+                .reduce(0, (a, b) -> (a + b) % base);
+        final int result = (int) ((allPermutations - invalidOnes + base) % base);
         intCache.put(key, result);
         return result;
     }
 
-    private static BigInteger f(int n) {
+    private static long f(int n) {
         if (n < 0) {
-            return ZERO;
+            return 0;
         }
 
         if (n == 0) {
-            return ONE;
+            return 1;
         }
 
         final String key = String.format("f(%s)", n);
-        final BigInteger maybeResult = bigIntegerCache.get(key);
+        final Long maybeResult = longCache.get(key);
         if (maybeResult != null) {
             return maybeResult;
         }
 
-        final BigInteger result = IntStream.range(1, 5)
+        final long result = IntStream.range(1, 5)
                 .mapToObj(i -> f(n - i))
-                .reduce(ZERO, BigInteger::add);
-        bigIntegerCache.put(key, result);
+                .reduce(0L, (a, b) -> (a + b) % base);
+        longCache.put(key, result);
         return result;
     }
 
-    private static BigInteger g(int n, int m) {
+    private static long g(int n, int m) {
         final String key = String.format("g(%s,%s)", n, m);
-        final BigInteger maybeResult = bigIntegerCache.get(key);
+        final Long maybeResult = longCache.get(key);
         if (maybeResult != null) {
             return maybeResult;
         }
 
-        final BigInteger result = f(m).pow(n);
-        bigIntegerCache.put(key, result);
+        final long result = IntStream.range(0, n)
+                .mapToLong($ -> f(m))
+                .reduce(1, (a, b) -> (a * b) % base);
+        longCache.put(key, result);
         return result;
     }
 
