@@ -16,7 +16,9 @@ class ResultTest {
             "2,2,3",
             "2,3,9",
             "3,2,7",
-            "4,4,3375"
+            "4,4,3375",
+            "1,5,0",
+            "4,5,35714",
     })
     void legoBlocks(int n, int m, int result) {
         final int actual = Result.legoBlocks(n, m);

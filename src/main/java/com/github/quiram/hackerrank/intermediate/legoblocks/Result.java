@@ -32,8 +32,8 @@ class Result {
             return 1;
         }
 
-        return IntStream.range(0, n)
-                .map(Result::f)
+        return IntStream.range(1, 5)
+                .map(i -> f(n - i))
                 .reduce(0, Integer::sum);
     }
 
