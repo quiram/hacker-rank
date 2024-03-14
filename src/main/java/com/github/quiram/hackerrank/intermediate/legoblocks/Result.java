@@ -9,8 +9,9 @@ import java.util.stream.IntStream;
  */
 class Result {
 
-    private final static Map<String, Integer> intCache = new ConcurrentHashMap<>();
-    private final static Map<String, Long> longCache = new ConcurrentHashMap<>();
+    private final static Map<Integer, Long> hCache = new ConcurrentHashMap<>();
+    private final static Map<Integer, Long> fCache = new ConcurrentHashMap<>();
+    private final static Map<Integer, Long> gCache = new ConcurrentHashMap<>();
     private static final int base = 1000000007;
 
     /*
@@ -23,21 +24,24 @@ class Result {
      */
 
     public static int legoBlocks(int n, int m) {
+        resetCaches();
+        return h(n, m);
+    }
+
+    private static int h(int n, int m) {
         // Write your code here
-        final String key = String.format("h(%s,%s)", n, m);
-        final Integer maybeResult = intCache.get(key);
+        final Long maybeResult = hCache.get(m);
         if (maybeResult != null) {
-            return maybeResult;
+            return (int) maybeResult.longValue();
         }
 
         final long allPermutations = g(n, m);
         final long invalidOnes = IntStream.range(1, m)
-                .parallel()
-                .mapToLong(i -> ((g(n, m - i) * (legoBlocks(n, i))) % base))
+                .mapToLong(i -> ((g(n, m - i) * (h(n, i))) % base))
                 .reduce(0, (a, b) -> (a + b) % base);
-        final int result = (int) ((allPermutations - invalidOnes + base) % base);
-        intCache.put(key, result);
-        return result;
+        final long result = (allPermutations - invalidOnes + base) % base;
+        hCache.put(m, result);
+        return (int) result;
     }
 
     private static long f(int n) {
@@ -49,8 +53,7 @@ class Result {
             return 1;
         }
 
-        final String key = String.format("f(%s)", n);
-        final Long maybeResult = longCache.get(key);
+        final Long maybeResult = fCache.get(n);
         if (maybeResult != null) {
             return maybeResult;
         }
@@ -58,13 +61,12 @@ class Result {
         final long result = IntStream.range(1, 5)
                 .mapToObj(i -> f(n - i))
                 .reduce(0L, (a, b) -> (a + b) % base);
-        longCache.put(key, result);
+        fCache.put(n, result);
         return result;
     }
 
     private static long g(int n, int m) {
-        final String key = String.format("g(%s,%s)", n, m);
-        final Long maybeResult = longCache.get(key);
+        final Long maybeResult = gCache.get(m);
         if (maybeResult != null) {
             return maybeResult;
         }
@@ -72,10 +74,15 @@ class Result {
         final long result = IntStream.range(0, n)
                 .mapToLong($ -> f(m))
                 .reduce(1, (a, b) -> (a * b) % base);
-        longCache.put(key, result);
+        gCache.put(m, result);
         return result;
     }
 
+    private static void resetCaches() {
+        hCache.clear();
+        fCache.clear();
+        gCache.clear();
+    }
 }
 
 
