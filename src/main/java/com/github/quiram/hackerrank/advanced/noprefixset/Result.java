@@ -16,17 +16,15 @@ class Result {
      */
 
     static class TrieNode {
-        char c;
         TrieNode[] next;
 
-        TrieNode(char c) {
-            this.c = c;
+        TrieNode() {
             next = new TrieNode[10];
         }
     }
 
     public static void noPrefix(List<String> words) {
-        TrieNode root = new TrieNode((char) 0);
+        TrieNode root = new TrieNode();
         // Write your code here
         for (String word : words) {
             TrieNode node = root;
@@ -39,7 +37,7 @@ class Result {
                         return;
                     }
 
-                    final TrieNode newNode = new TrieNode(c);
+                    final TrieNode newNode = new TrieNode();
                     node.next[c - 'a'] = newNode;
                     node = newNode;
                     nodeCreation = true;
