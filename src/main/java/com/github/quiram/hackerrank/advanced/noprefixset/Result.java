@@ -8,13 +8,6 @@ import java.util.Objects;
  * <a href="https://www.hackerrank.com/challenges/one-week-preparation-kit-no-prefix-set/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=one-week-preparation-kit&playlist_slugs%5B%5D=one-week-day-seven">No Prefix Set</a>
  */
 class Result {
-
-    /*
-     * Complete the 'noPrefix' function below.
-     *
-     * The function accepts STRING_ARRAY words as parameter.
-     */
-
     static class TrieNode {
         TrieNode[] next;
 
@@ -23,6 +16,11 @@ class Result {
         }
     }
 
+    /*
+     * Complete the 'noPrefix' function below.
+     *
+     * The function accepts STRING_ARRAY words as parameter.
+     */
     public static void noPrefix(List<String> words) {
         TrieNode root = new TrieNode();
         // Write your code here
